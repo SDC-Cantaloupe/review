@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage",
+    "server-dev": "nodemon servers/index.js"
   },
   "repository": {
     "type": "git",
@@ -17,10 +18,12 @@
   },
   "homepage": "https://github.com/SDC-Cantaloupe/review#readme",
   "devDependencies": {
-    "jest": "^27.0.6"
+    "jest": "^27.0.6",
+    "supertest": "^6.1.4"
   },
   "dependencies": {
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "postgresql": "0.0.1"
+    "pg": "^8.7.1"
   }
 }

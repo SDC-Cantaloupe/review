@@ -1,22 +1,25 @@
 const express = require('express')
 const app = express()
 const PORT = 3000;
-
+const db = require('../db/index.js')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// app.use(express.static(__dirname + "/../client/dist"));
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
 });
 
-app.get('/reviews/')
-app.get('/reviews/meta')
+app.get('/reviews', db.getProductReviews)
+
+
+app.get('/reviews/meta', db.getMeta)
 app.post('/reviews')
-app.put('/reviews/[review_id]/helpful')
-app.put('/reviews/[review_id]/report')
-app.listen(port, () => {
+app.put('/reviews/:review_id/helpful')
+app.put('/reviews/:review_id/report')
+
+app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 })
+
+module.exports = app;
