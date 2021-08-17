@@ -3,9 +3,9 @@ const { Pool } = require('pg')
 
 const pool = new Pool ({
   user: 'hackreactor',
-  host: 'localhost',
+  host: '3.101.22.67',
   database: 'reviewsdb',
-  port: 5432
+  port: 32
 });
 
 
