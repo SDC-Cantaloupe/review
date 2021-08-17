@@ -18,7 +18,7 @@ app.post('/reviews', db.postReview)
 app.put('/reviews/:review_id/helpful', db.putHelpfulReview)
 app.put('/reviews/:review_id/report', db.putReportReview)
 
-app.listen(PORT, "https://54.151.67.235/", function () {
+app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 })
 // app.listen(32, "3.101.22.67", function () {
