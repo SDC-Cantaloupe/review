@@ -5,7 +5,7 @@ const pool = new Pool ({
   user: 'hackreactor',
   host: '3.101.22.67',
   database: 'reviewsdb',
-  port: 32
+  port: 5432
 });
 
 
