@@ -40,7 +40,7 @@ const reviewMockData =
       "helpfulness": 5,
       "photos": [],
     }
-  }
+  };
 
 const metaMockData =
 [
@@ -87,5 +87,6 @@ const metaMockData =
 ]
 
 module.exports = {
-  metaMockData
+  metaMockData,
+  reviewMockData
 }

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">35.14% </span>
+                <span class="strong">10.81% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/37</span>
+                <span class='fraction'>4/37</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">31.25% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/16</span>
+                <span class='fraction'>0/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>1/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">36.11% </span>
+                <span class="strong">11.11% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/36</span>
+                <span class='fraction'>4/36</span>
             </div>
         
             
@@ -201,27 +201,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -292,18 +292,18 @@
       'recommended' : {},
       'characteristics' : {}
     }
-    rows.forEach(row =&gt; {
-      obj['ratings'][row.rating] = (parseInt(obj['ratings'][row.rating]) | 0) + 1
-      if(row.recommend === 'true') {
-        obj['recommended']['1'] = (parseInt(obj['recommended']['1']) | 0) + 1
-      } else <span class="missing-if-branch" title="else path not taken" >E</span>if(row.recommend === 'false') {
-          obj['recommended']['0'] = (parseInt(obj['recommended']['0']) | 0) + 1
+    rows.forEach(<span class="fstat-no" title="function not covered" >ro</span>w =&gt; {
+<span class="cstat-no" title="statement not covered" >      obj['ratings'][row.rating] = (parseInt(obj['ratings'][row.rating]) | 0) + 1</span>
+<span class="cstat-no" title="statement not covered" >      if(row.recommend === 'true') {</span>
+<span class="cstat-no" title="statement not covered" >        obj['recommended']['1'] = (parseInt(obj['recommended']['1']) | 0) + 1</span>
+      } else <span class="cstat-no" title="statement not covered" >if(row.recommend === 'false') {</span>
+<span class="cstat-no" title="statement not covered" >          obj['recommended']['0'] = (parseInt(obj['recommended']['0']) | 0) + 1</span>
       }
-      if(obj['characteristics'][row.name] === undefined) {
-        obj['characteristics'][row.name] = { 'id': row.characteristic_id, 'value': row.value, 'count': 1}
+<span class="cstat-no" title="statement not covered" >      if(obj['characteristics'][row.name] === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        obj['characteristics'][row.name] = { 'id': row.characteristic_id, 'value': row.value, 'count': 1}</span>
       } else {
-        obj['characteristics'][row.name]['value'] = (obj['characteristics'][row.name]['value']* obj['characteristics'][row.name]['count']+ row.value)/ (obj['characteristics'][row.name]['count'] + 1)
-        obj['characteristics'][row.name]['count'] = obj['characteristics'][row.name]['count'] + 1
+<span class="cstat-no" title="statement not covered" >        obj['characteristics'][row.name]['value'] = (obj['characteristics'][row.name]['value']* obj['characteristics'][row.name]['count']+ row.value)/ (obj['characteristics'][row.name]['count'] + 1)</span>
+<span class="cstat-no" title="statement not covered" >        obj['characteristics'][row.name]['count'] = obj['characteristics'][row.name]['count'] + 1</span>
       }
     })
     return obj
@@ -319,7 +319,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Aug 04 2021 19:23:55 GMT-0700 (Pacific Daylight Time)
+                at Tue Aug 10 2021 10:56:16 GMT-0700 (Pacific Daylight Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

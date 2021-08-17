@@ -52,7 +52,7 @@ module.exports = {
 
     }
   })
-  conaole.log(obj)
+  console.log(obj)
     return obj
   },
 
@@ -79,8 +79,5 @@ module.exports = {
     })
     return obj
   }
-
-
-
 
 }

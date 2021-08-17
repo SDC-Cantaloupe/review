@@ -16,7 +16,7 @@ const getProductReviews = (req, res) => {
     text: `SELECT reviews.id, reviews.rating, reviews.summary, reviews.recommend, reviews.response, reviews.body, reviews.date, reviews.reviewer_name, reviews.helpfulness, reviews_photos.url from reviews
     LEFT JOIN reviews_photos ON reviews.id = reviews_photos.review_id
     WHERE reviews.product_id = $1 AND reviews.reported = 'false' ORDER BY reviews.helpfulness DESC LIMIT $2;`,
-    values: [req.query.product_id | 2, req.query.count + 10 | 100]
+    values: [req.query.product_id | 2, req.query.count | 100]
   }
   pool.query(query)
   .then(result => {
@@ -38,8 +38,9 @@ const getMeta = (req, res) => {
     INNER JOIN characteristic_reviews t2 ON t1.id = t2.review_id
     INNER JOIN characteristics t3 ON t2.characteristic_id = t3.id
     WHERE t1.product_id = $1;`,
-    values: [product_id | 2]
+    values: [product_id]
   }
+
   pool.query(query)
   .then(result => {
     console.log('result', result.rows)
@@ -54,7 +55,7 @@ const getMeta = (req, res) => {
 };
 const postReview = (req, res) => {
   console.log('made it')
-  // var valueObj = {
+  // var req.query = {
   //   'product_id': ,
   //   'rating': ,
   //   'date': ,
@@ -62,30 +63,44 @@ const postReview = (req, res) => {
   //   'recommend': ,
   //   'response': ,
   //   'body': ,
-  //   'date': ,
   //   'reviewer_name': ,
   //   'email': ,
   //   'photos': ,
   //   'characteristics':
   // }
+  const date = parseInt(new Date().toISOString());
   const query = {
-    text: `
-    INSERT INTO reviews
-    (reviews.product_id, reviews.rating, reviews.date, reviews.summary, reviews.recommend, reviews.response, reviews.body, reviews.date, reviews.reviewer_name, reviews.email)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
-    RETURNING reviews.id
-    INSERT INTO reviews_photos (review_id, url) VALUES (reviews.id, $10)`,
-    values: [valueObj.product_id, valueObj.rating, valueObj.date, valueObj.summary, valueObj.recommend, valueObj.response, valueObj.body, valueObj.date, valueObj.reviewer_name, valueObj.email]
+    text: `INSERT INTO reviews (product_id, rating, date, summary, recommend, body, reviewer_name, reviewer_email, response, helpfulness, reported) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id;`,
+    values: [req.body.product_id, req.body.rating,date, req.body.summary, req.body.recommend, req.body.body, req.body.name, req.body.email, null, 0, 'false']
   }
+  //fix date type bigint
+  // INSERT INTO reviews_photos (review_id, url) VALUES (reviews.id, $9)
   pool.query(query)
-  .then(result => {
-    res.sendStatus(200)
+  .then((results) => {
+    const review_id = results.rows[0].id;
+
+    if (req.body.photos.length) {
+      req.body.photos.forEach(async (item) => {
+        await pool.query(`INSERT INTO reviews_photos (review_id, url) VALUES (${review_id}, '${item}')`)
+      })
+    }
+    return results
+  })
+  .then( async (results) => {
+    const characteristics = req.body.characteristics;
+    const review_id = results.rows[0].id;
+
+    for (let key in characteristics) {
+      await pool.query(`INSERT INTO characteristic_reviews (characteristic_id, review_id, value) VALUES (${key}, ${review_id}, '${characteristics[key]}')`)
+    }
+    res.sendStatus(204);
   })
   .catch(err => {
     throw err;
   })
 
 };
+
 const putHelpfulReview = (req, res) => {
   console.log('made it')
   var review_id = req.query.review_id
@@ -125,20 +140,3 @@ module.exports = {
   putHelpfulReview,
   putReportReview
 }
-// require('dotenv').config();
-// pool.connect((err) => {
-  //   if (err) {
-    //     console.log("Connection Failed: ", err);
-    //   } else {
-      //     console.log("Connected");
-      //   }
-      // });
-
-      // pool.query('SELECT NOW()', (err, res) => {
-        //   if (err) {
-          //     console.log('ERR: ' + err.message);
-          //   } else {
-            //     console.log('Postgres db connected');
-            //   }
-            //   pool.end();
-            // });
