@@ -1,11 +1,17 @@
 const helper = require('../db/helper.js')
 const { Pool } = require('pg')
 
+require('dotenv').config();
+
+console.log(process.cwd() + '/.env' );
+
+
 const pool = new Pool ({
-  user: 'hackreactor',
-  host: '3.101.22.67',
-  database: 'reviewsdb',
-  port: 5432
+  user: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DB,
+  host: process.env.POSTGRES_HOST,
+  port: 5432,
 });
 
 
