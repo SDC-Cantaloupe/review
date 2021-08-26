@@ -1,6 +1,9 @@
 const helper = require('../db/helper.js')
 const { Pool } = require('pg')
+const redis = require('redis')
+const REDIS_PORT = 6379;
 
+const client = redis.createClient(REDIS_PORT);
 require('dotenv').config();
 
 
@@ -13,6 +16,16 @@ const pool = new Pool ({
   host: process.env.POSTGRES_HOST,
   port: 5432,
 });
+const cache = (req, res, next) => {
+  client.get(req.query.product_id, (err, data) => {
+    if(err) throw err;
+    if(data !== null) {
+      res.send(data)
+    } else {
+        next()
+    }
+   })
+};
 
 
 const getProductReviews = (req, res) => {
@@ -27,6 +40,7 @@ const getProductReviews = (req, res) => {
   pool.query(query)
   .then(result => {
     var formatted = helper.formatReviews(req.query.product_id | 2, req.query.page | 1, req.query.count | 5, result.rows)
+    client.setex(req.query.product_id, formatted)
     res.send(formatted)
   })
   .catch(err => {
@@ -144,5 +158,6 @@ module.exports = {
   getMeta,
   postReview,
   putHelpfulReview,
-  putReportReview
+  putReportReview,
+  cache
 }

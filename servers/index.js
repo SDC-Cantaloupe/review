@@ -11,14 +11,17 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 });
 
-app.get('/reviews', db.getProductReviews)
+app.get('/reviews', db.cache, db.getProductReviews)
 
 
 app.get('/reviews/meta', db.getMeta)
 app.post('/reviews', db.postReview)
 app.put('/reviews/:review_id/helpful', db.putHelpfulReview)
 app.put('/reviews/:review_id/report', db.putReportReview)
+app.get('/loaderio-226dee531682ca90b7e97313e0a370f7/', (req, res) => {
+  res.send('loaderio-226dee531682ca90b7e97313e0a370f7')
 
+});
 
 // app.get('/loaderio-226dee531682ca90b7e97313e0a370f7.txt', (req, res) => {
 //   fs.readFile('../loaderio.js', (err,data) => {
