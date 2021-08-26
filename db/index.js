@@ -3,7 +3,7 @@ const { Pool } = require('pg')
 
 require('dotenv').config();
 
-console.log(process.cwd() + '/.env' );
+
 
 
 const pool = new Pool ({
